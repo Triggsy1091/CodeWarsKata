@@ -1,21 +1,28 @@
+# Complete the method/function so that it converts dash/underscore delimited words into camel casing. The first word within the output should be capitalized only if the original word was capitalized (known as Upper Camel Case, also often referred to as Pascal case). The next words should be always capitalized.
+
+# Examples
+# "the-stealth-warrior" gets converted to "theStealthWarrior"
+
+# "The_Stealth_Warrior" gets converted to "TheStealthWarrior"
+
+# "The_Stealth-Warrior" gets converted to "TheStealthWarrior"
+
 import re
 
-def to_camel_case(input_string):
-    # Split the input string by hyphens and underscores
-    words = re.split(r'[-_]', input_string)
-    
-    # Capitalize the first word if it was already capitalized
-    if words and words[0][0].isupper():
-        words[0] = words[0][0].upper() + words[0][1:]
-    
-    # Capitalize the remaining words
-    for i in range(1, len(words)):
-        words[i] = words[i].capitalize()
+def to_camel_case(text):
+    # Check if the input string is empty
+    if not text:
+        return ""
 
-    # Join the words to form the CamelCase string
-    camel_case_string = ''.join(words)
-
-    return camel_case_string
+    words = re.split(r'[-_]', text)
+    
+    for i in range(len(words)):
+        if i == 0:
+            words[i] = words[i][0].upper() + words[i][1:] if words[i][0].isupper() else words[i]
+        else:
+            words[i] = words[i].capitalize()
+    
+    return ''.join(words)
 
 # Example usage:
 input_string1 = "The_Stealth-Warrior"
